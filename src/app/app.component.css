@@ -1,0 +1,4 @@
+:host {
+  display: grid;
+  grid-template-rows: 8vh 0px 100vh 6vh;
+}
