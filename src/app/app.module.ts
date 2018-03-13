@@ -8,6 +8,7 @@ import { PiecesComponent } from './pieces/pieces.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SplashComponent } from './splash/splash.component';
+import { BoardComponent } from './board/board.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { SplashComponent } from './splash/splash.component';
     PiecesComponent,
     HeaderComponent,
     FooterComponent,
-    SplashComponent
+    SplashComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
