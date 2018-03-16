@@ -8,6 +8,11 @@
   border-radius: 5px;
 }
 
+.piece-container:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
 .container {
   display: flex;
   align-items: center;
