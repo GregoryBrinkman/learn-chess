@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SplashComponent } from './splash/splash.component';
 import { BoardComponent } from './board/board.component';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { BoardComponent } from './board/board.component';
     HeaderComponent,
     FooterComponent,
     SplashComponent,
-    BoardComponent
+    BoardComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule,
