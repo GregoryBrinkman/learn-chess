@@ -5,8 +5,6 @@
 }
 
 .board {
-  min-height: 440px;
-  min-width: 440px;
   border: 1px solid black;
   display: grid;
   grid-template-rows: repeat(1fr, 8);
@@ -21,9 +19,11 @@
                        "a1 b1 c1 d1 e1 f1 g1 h1";
 }
 
+div > div:hover {
+  background-color: yellow;
+}
+
 div > div {
-  height: 55px;
-  width: 55px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -286,6 +286,24 @@ div > div {
   grid-area: h8;
 }
 
-div > div:hover {
-  background-color: yellow;
+.board {
+  height: 80vh;
+  width: 80vh;
+}
+
+div > div {
+  height: 10vh;
+  width: 10vh;
+}
+
+@media screen and (max-width: 550px) {
+  .board {
+    height: 88vw;
+    width: 88vw;
+  }
+
+  div > div {
+    height: 11vw;
+    width: 11vw;
+  }
 }
