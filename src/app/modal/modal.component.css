@@ -1,0 +1,15 @@
+.piece-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.piece-container {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

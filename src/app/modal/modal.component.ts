@@ -9,6 +9,13 @@ export class ModalComponent implements OnInit {
 
   constructor() { }
 
+  clickPawn() { console.log("Pawn");}
+  clickKing() { console.log("King");}
+  clickQueen() { console.log("Queen");}
+  clickRook() { console.log("Rook");}
+  clickBishop() { console.log("Bishop");}
+  clickKnight() { console.log("Knight");}
+
   ngOnInit() {
   }
 
