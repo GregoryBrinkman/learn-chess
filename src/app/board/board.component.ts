@@ -15,6 +15,19 @@ export class BoardComponent implements OnInit {
     this.makeSquares();
   }
 
+  allowDrop(value) {
+    console.log("ALLOW_DROP " + value);
+  }
+
+  drop(value, data) {
+    console.log("DROP " + value);
+    console.log("DATA " + data);
+  }
+
+  drag(value, data) {
+    console.log("DRAG " + value);
+    console.log("DATA " + data);
+  }
 
   makeSquares() {
     let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];

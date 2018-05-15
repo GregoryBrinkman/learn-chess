@@ -1,3 +1,5 @@
 <div class="board">
-  <div *ngFor="let square of squares" [attr.class]="square"></div>
+  <div *ngFor="let square of squares" (drop)="drop($event, data)" (dragover)="allowDrop($event)" [attr.class]="square">
+    <img src="assets/Chess_ndt45.svg" draggable="true" (dragstart)="drag($event, data)">
+  </div>
 </div>
