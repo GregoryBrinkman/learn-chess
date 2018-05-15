@@ -10,6 +10,7 @@ export class BoardComponent implements OnInit {
   constructor() { }
 
   squares = [];
+  bool = true;
 
   ngOnInit() {
     this.makeSquares();
@@ -20,13 +21,18 @@ export class BoardComponent implements OnInit {
   }
 
   drop(value, data) {
-    console.log("DROP " + value);
-    console.log("DATA " + data);
+    console.log("DROP", value);
+    console.log("DATA", data);
   }
 
   drag(value, data) {
-    console.log("DRAG " + value);
-    console.log("DATA " + data);
+    console.log("DRAG", value);
+    console.log("DATA", data);
+  }
+
+  alternate() {
+    this.bool = !this.bool;
+    return !this.bool;
   }
 
   makeSquares() {

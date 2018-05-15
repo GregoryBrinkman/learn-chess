@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SplashComponent } from './splash/splash.component';
 import { BoardComponent } from './board/board.component';
 import { ModalComponent } from './modal/modal.component';
+import { PieceComponent } from './piece/piece.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ModalComponent } from './modal/modal.component';
     FooterComponent,
     SplashComponent,
     BoardComponent,
-    ModalComponent
+    ModalComponent,
+    PieceComponent
   ],
   imports: [
     BrowserModule,
