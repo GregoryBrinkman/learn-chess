@@ -1,7 +1,4 @@
 <div class="board">
-  <div *ngFor="let square of squares" (drop)="drop($event, data)" (dragover)="allowDrop($event)" [attr.class]="square">
-    <div *ngIf="alternate()">
-      <app-piece></app-piece>
-    </div>
+  <div *ngFor="let square of squares" [attr.class]="square">
   </div>
 </div>
