@@ -11,7 +11,7 @@ export class BoardComponent implements OnInit {
 
   squares = [];
   bool = true;
-  selectedSquare; // {rank: [CHARACTER], file: [NUMBER]}
+  selectedPiece;
   gameType; // ['Pawn', 'Rook', Knight', 'Bishop', 'King', 'Queen', 'Target']
   pieces = [];
   /*
@@ -66,6 +66,63 @@ export class BoardComponent implements OnInit {
     }
   }
 
+  getPossibleMoves(piece) {
+    console.log(piece);
+    switch(piece.type) {
+      case 'Pawn':
+        return this.getPawnMoves(piece);
+      case 'Rook':
+        return this.getRookMoves(piece);
+      case 'Bishop':
+        return this.getBishopMoves(piece);
+      case 'Knight':
+        return this.getKnightMoves(piece);
+      case 'King':
+        return this.getKingMoves(piece);
+      case 'Queen':
+        return this.getQueenMoves(piece);
+      case 'Target':
+      default:
+        return [];
+    }
+  }
+
+  getPawnMoves(piece) {
+    //uses color, rank, and file
+    let retArr = [];
+    return retArr;
+  }
+
+  getRookMoves(piece) {
+    //uses rank and file
+    let retArr = [];
+    return retArr;
+  }
+
+  getBishopMoves(piece) {
+    //uses rank and file
+    let retArr = [];
+    return retArr;
+  }
+
+  getKnightMoves(piece) {
+    //uses rank and file
+    let retArr = [];
+    return retArr;
+  }
+
+  getKingMoves(piece) {
+    //uses rank and file
+    let retArr = [];
+    return retArr;
+  }
+
+  getQueenMoves(piece) {
+    //uses rank and file
+    let retArr = [];
+    return retArr;
+  }
+
   generateGame() {
     let ranks = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     let colors = ['Light', 'Dark'];
@@ -83,11 +140,13 @@ export class BoardComponent implements OnInit {
   }
 
   updateBoard() {
+  //remove old pieces
     let oldPieces = this.el.nativeElement.querySelectorAll('.piece');
     for(let i = 0; i < oldPieces.length; i++) {
       this.renderer.removeChild(oldPieces[i].parentNode, oldPieces[i]);
     }
 
+  //make new ones
     let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
     for(let i = 0; i < this.pieces.length; i++) {
       let piece = this.pieces[i];
@@ -95,6 +154,7 @@ export class BoardComponent implements OnInit {
       let htmlSquare = this.el.nativeElement.querySelector(squareStr);
       let img = this.renderer.createElement('img');
       this.renderer.setProperty(img, 'src', this.getImage(piece));
+      this.renderer.setProperty(img, 'data', piece);
       this.renderer.addClass(img, 'piece');
 
       this.renderer.appendChild(htmlSquare, img);
@@ -123,6 +183,29 @@ export class BoardComponent implements OnInit {
       for (let j = 0; j < numbers.length; j++) {
         this.squares.push(letters[i] + '_' + numbers[j]);
       }
+    }
+  }
+
+  click(clickedSquare) {
+    if(!!clickedSquare.target.data) {
+      this.selectedPiece = clickedSquare.target.data;
+    } else if (!!this.selectedPiece) {
+      let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+      let split = clickedSquare.target.className.split("_");
+      let square;
+      for (let i = 0; i < numbers.length; i++) {
+        if(split[1] === numbers[i]) {
+          square = {rank: split[0], file: i+1};
+        }
+      }
+      if(!!square) {
+        let acceptedSquares = this.getPossibleMoves(this.selectedPiece);
+        console.log(square);
+        console.log(acceptedSquares);
+
+      }
+    } else {
+      this.selectedPiece = null;
     }
   }
 }

@@ -296,6 +296,11 @@ div > div {
   width: 10vh;
 }
 
+.piece {
+  height: 10vh;
+  width: 10vh;
+}
+
 @media screen and (max-width: 550px) {
   .board {
     height: 88vw;
@@ -303,6 +308,11 @@ div > div {
   }
 
   div > div {
+    height: 11vw;
+    width: 11vw;
+  }
+
+  .piece {
     height: 11vw;
     width: 11vw;
   }
