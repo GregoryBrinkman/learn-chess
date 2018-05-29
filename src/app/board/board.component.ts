@@ -67,24 +67,36 @@ export class BoardComponent implements OnInit {
   }
 
   getPossibleMoves(piece) {
-    console.log(piece);
     switch(piece.type) {
       case 'Pawn':
-        return this.getPawnMoves(piece);
+      //return this.getPawnMoves(piece);
       case 'Rook':
-        return this.getRookMoves(piece);
+      //return this.getRookMoves(piece);
       case 'Bishop':
-        return this.getBishopMoves(piece);
+      //return this.getBishopMoves(piece);
       case 'Knight':
-        return this.getKnightMoves(piece);
+      //return this.getKnightMoves(piece);
       case 'King':
-        return this.getKingMoves(piece);
+      //return this.getKingMoves(piece);
       case 'Queen':
-        return this.getQueenMoves(piece);
+      //return this.getQueenMoves(piece);
       case 'Target':
       default:
-        return [];
+      //return [];
+      return this.testGrid();
     }
+  }
+
+  testGrid() {
+    let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    let retArr = [];
+
+    for(let i = 0; i < letters.length; i++) {
+      for(let j = 1; j < 9; j++) {
+        retArr.push({rank: letters[i], file: j});
+      }
+    }
+    return retArr;
   }
 
   getPawnMoves(piece) {
@@ -187,9 +199,13 @@ export class BoardComponent implements OnInit {
   }
 
   click(clickedSquare) {
-    if(!!clickedSquare.target.data) {
-      this.selectedPiece = clickedSquare.target.data;
-    } else if (!!this.selectedPiece) {
+    //if there's a selectedPiece, then check if the square is an acceptable move,
+    //if not and the square has data, that square is now the selected piece
+    //if there's no data and no selectedPiece, ignore
+
+    if(!!this.selectedPiece) {
+
+
       let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
       let split = clickedSquare.target.className.split("_");
       let square;
@@ -198,14 +214,65 @@ export class BoardComponent implements OnInit {
           square = {rank: split[0], file: i+1};
         }
       }
+
       if(!!square) {
-        let acceptedSquares = this.getPossibleMoves(this.selectedPiece);
-        console.log(square);
-        console.log(acceptedSquares);
+        let possibleSquares = this.getPossibleMoves(this.selectedPiece);
+        for (let i = 0; i < possibleSquares.length; i++) {
+          if(possibleSquares[i].rank === square.rank
+            && possibleSquares[i].file === square.file) {
+
+            for(let j = 0; j < this.pieces.length; j++) {
+              if(this.pieces[j] === this.selectedPiece) {
+                this.pieces[j].rank = square.rank;
+                this.pieces[j].file = square.file;
+                this.updateBoard();
+              }
+            }
+          }
+        }
+      } else {
 
       }
+
+
+
+
+    //this.selectedPiece = null;
     } else {
-      this.selectedPiece = null;
+      if(!!clickedSquare.target.data) {
+        if(clickedSquare.target.data.type === 'Target') {
+          console.log(clickedSquare.target.data);
+        } else {
+          this.selectedPiece = clickedSquare.target.data;
+        }
+      }
     }
   }
+
+  //click(clickedSquare) {
+  //if(!!clickedSquare.target.data) {
+  //this.selectedPiece = clickedSquare.target.data;
+  //
+  //} else if (!!this.selectedPiece) {
+  //
+  //let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+  //let split = clickedSquare.target.className.split("_");
+  //let square;
+  //for (let i = 0; i < numbers.length; i++) {
+  //if(split[1] === numbers[i]) {
+  //square = {rank: split[0], file: i+1};
+  //}
+  //}
+  //
+  //console.log(square);
+  //
+  //if(!!square) {
+  //let acceptedSquares = this.getPossibleMoves(this.selectedPiece);
+  ////console.log(acceptedSquares);
+  //
+  //}
+  //} else {
+  //this.selectedPiece = null;
+  //}
+  //}
 }
