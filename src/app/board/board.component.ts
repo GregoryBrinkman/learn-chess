@@ -205,39 +205,40 @@ export class BoardComponent implements OnInit {
 
     if(!!this.selectedPiece) {
 
-
-      let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-      let split = clickedSquare.target.className.split("_");
       let square;
-      for (let i = 0; i < numbers.length; i++) {
-        if(split[1] === numbers[i]) {
-          square = {rank: split[0], file: i+1};
+      if(!!clickedSquare.target.data) {
+        square = clickedSquare.target.data;
+      } else {
+        let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
+        let split = clickedSquare.target.className.split("_");
+        for (let i = 0; i < numbers.length; i++) {
+          if(split[1] === numbers[i]) {
+            square = {rank: split[0], file: i+1};
+          }
         }
       }
 
       if(!!square) {
         let possibleSquares = this.getPossibleMoves(this.selectedPiece);
         for (let i = 0; i < possibleSquares.length; i++) {
-          if(possibleSquares[i].rank === square.rank
-            && possibleSquares[i].file === square.file) {
+          if(possibleSquares[i].rank === square.rank && possibleSquares[i].file === square.file) {
+            for(let j = 0; j < this.pieces.length; j++) {
+              if(this.pieces[j].rank === square.rank && this.pieces[j].file === square.file) {
+                this.pieces.splice(j, 1);
+              }
+            }
 
             for(let j = 0; j < this.pieces.length; j++) {
               if(this.pieces[j] === this.selectedPiece) {
                 this.pieces[j].rank = square.rank;
                 this.pieces[j].file = square.file;
-                this.updateBoard();
               }
             }
+            this.updateBoard();
+            this.selectedPiece = null;
           }
         }
-      } else {
-
       }
-
-
-
-
-    //this.selectedPiece = null;
     } else {
       if(!!clickedSquare.target.data) {
         if(clickedSquare.target.data.type === 'Target') {
@@ -248,31 +249,4 @@ export class BoardComponent implements OnInit {
       }
     }
   }
-
-  //click(clickedSquare) {
-  //if(!!clickedSquare.target.data) {
-  //this.selectedPiece = clickedSquare.target.data;
-  //
-  //} else if (!!this.selectedPiece) {
-  //
-  //let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
-  //let split = clickedSquare.target.className.split("_");
-  //let square;
-  //for (let i = 0; i < numbers.length; i++) {
-  //if(split[1] === numbers[i]) {
-  //square = {rank: split[0], file: i+1};
-  //}
-  //}
-  //
-  //console.log(square);
-  //
-  //if(!!square) {
-  //let acceptedSquares = this.getPossibleMoves(this.selectedPiece);
-  ////console.log(acceptedSquares);
-  //
-  //}
-  //} else {
-  //this.selectedPiece = null;
-  //}
-  //}
 }
