@@ -130,12 +130,29 @@ export class BoardComponent implements OnInit {
         retArr.push(square);
       }
 
-
       if(file_index === 0) {
-
+        let rightSquare = {
+          rank: piece.rank-1,
+          file: letters[file_index+1]
+        };
+        retArr.push(rightSquare);
       } else if (file_index === 7) {
-
+        let leftSquare = {
+          rank: piece.rank-1,
+          file: letters[file_index-1]
+        };
+        retArr.push(leftSquare);
       } else {
+        let leftSquare = {
+          rank: piece.rank-1,
+          file: letters[file_index-1]
+        };
+        retArr.push(leftSquare);
+        let rightSquare = {
+          rank: piece.rank-1,
+          file: letters[file_index+1]
+        };
+        retArr.push(rightSquare);
 
       }
 
@@ -158,10 +175,28 @@ export class BoardComponent implements OnInit {
 
 
       if(file_index === 0) {
-
+        let rightSquare = {
+          rank: piece.rank+1,
+          file: letters[file_index+1]
+        };
+        retArr.push(rightSquare);
       } else if (file_index === 7) {
-
+        let leftSquare = {
+          rank: piece.rank+1,
+          file: letters[file_index-1]
+        };
+        retArr.push(leftSquare);
       } else {
+        let leftSquare = {
+          rank: piece.rank+1,
+          file: letters[file_index-1]
+        };
+        retArr.push(leftSquare);
+        let rightSquare = {
+          rank: piece.rank+1,
+          file: letters[file_index+1]
+        };
+        retArr.push(rightSquare);
 
       }
     }
