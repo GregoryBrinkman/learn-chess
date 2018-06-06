@@ -15,8 +15,8 @@ export class BoardComponent implements OnInit {
   gameType; // ['Pawn', 'Rook', Knight', 'Bishop', 'King', 'Queen', 'Target']
   pieces = [];
   /*
-  * [{rank: [CHARACTER],
-  *   file: [NUMBER],
+  * [{rank: [NUMBER],
+  *   file: [CHARACTER],
   *   color: ['Light', 'Dark']
   *   type: ['Pawn', 'Rook', Knight', 'Bishop', 'King', 'Queen', 'Target']}
   * , ...]
@@ -69,7 +69,7 @@ export class BoardComponent implements OnInit {
   getPossibleMoves(piece) {
     switch(piece.type) {
       case 'Pawn':
-      //return this.getPawnMoves(piece);
+        return this.getPawnMoves(piece);
       case 'Rook':
       //return this.getRookMoves(piece);
       case 'Bishop':
@@ -93,7 +93,7 @@ export class BoardComponent implements OnInit {
 
     for(let i = 0; i < letters.length; i++) {
       for(let j = 1; j < 9; j++) {
-        retArr.push({rank: letters[i], file: j});
+        retArr.push({file: letters[i], rank: j});
       }
     }
     return retArr;
@@ -102,6 +102,70 @@ export class BoardComponent implements OnInit {
   getPawnMoves(piece) {
     //uses color, rank, and file
     let retArr = [];
+
+    let letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    let file_index;
+    for (let i = 0; i < letters.length; i++) {
+      if(piece.file === letters[i]) {
+        file_index = i;
+      }
+    }
+
+    console.log(file_index);
+    console.log(piece);
+    if(piece.color === "Dark") {
+      let square = {
+        rank: piece.rank-1,
+        file: piece.file,
+      };
+
+      let flag = true;
+      for(let i = 0; i < this.pieces.length; i++) {
+        if(square.rank === this.pieces[i].rank && square.file === this.pieces[i].file) {
+          flag = !flag;
+        }
+      }
+
+      if(flag) {
+        retArr.push(square);
+      }
+
+
+      if(file_index === 0) {
+
+      } else if (file_index === 7) {
+
+      } else {
+
+      }
+
+    } else {
+      let square = {
+        rank: piece.rank+1,
+        file: piece.file,
+      };
+
+      let flag = true;
+      for(let i = 0; i < this.pieces.length; i++) {
+        if(square.rank === this.pieces[i].rank && square.file === this.pieces[i].file) {
+          flag = !flag;
+        }
+      }
+
+      if(flag) {
+        retArr.push(square);
+      }
+
+
+      if(file_index === 0) {
+
+      } else if (file_index === 7) {
+
+      } else {
+
+      }
+    }
+
     return retArr;
   }
 
@@ -136,14 +200,14 @@ export class BoardComponent implements OnInit {
   }
 
   generateGame() {
-    let ranks = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+    let files = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
     let colors = ['Light', 'Dark'];
     let types = ['Pawn', 'Rook', 'Knight', 'Bishop', 'King', 'Queen', 'Target'];
 
-    for(let i = 0; i < ranks.length; i++) {
+    for(let i = 0; i < files.length; i++) {
       let piece = {
-        rank: ranks[i],
-        file: i+1,
+        file: files[i],
+        rank: i+1,
         color: colors[i % colors.length],
         type: types[i % types.length]
       };
@@ -162,7 +226,7 @@ export class BoardComponent implements OnInit {
     let numbers = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight'];
     for(let i = 0; i < this.pieces.length; i++) {
       let piece = this.pieces[i];
-      let squareStr = '.' + piece.rank + '_' + numbers[piece.file - 1];
+      let squareStr = '.' + piece.file + '_' + numbers[piece.rank - 1];
       let htmlSquare = this.el.nativeElement.querySelector(squareStr);
       let img = this.renderer.createElement('img');
       this.renderer.setProperty(img, 'src', this.getImage(piece));
@@ -213,7 +277,7 @@ export class BoardComponent implements OnInit {
         let split = clickedSquare.target.className.split("_");
         for (let i = 0; i < numbers.length; i++) {
           if(split[1] === numbers[i]) {
-            square = {rank: split[0], file: i+1};
+            square = {file: split[0], rank: i+1};
           }
         }
       }
@@ -242,7 +306,6 @@ export class BoardComponent implements OnInit {
     } else {
       if(!!clickedSquare.target.data) {
         if(clickedSquare.target.data.type === 'Target') {
-          console.log(clickedSquare.target.data);
         } else {
           this.selectedPiece = clickedSquare.target.data;
         }
